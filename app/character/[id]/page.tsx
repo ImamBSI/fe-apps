@@ -28,11 +28,6 @@ interface Character {
     name: string;
     type: string;
   };
-  episode: {
-    id: string;
-    name: string;
-    episode: string;
-  }[];
 }
 
 interface CharacterResponse {
@@ -232,24 +227,6 @@ export default function CharacterDetailPage() {
               Assign to Location
             </button>
           )}
-
-          {/* Episodes */}
-          <div className="bg-white p-4 rounded-lg shadow-sm mt-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">Episodes ({character.episode.length})</h2>
-            <div className="space-y-2 max-h-64 overflow-y-auto">
-              {character.episode.slice(0, 10).map((ep) => (
-                <div key={ep.id} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                  <span className="text-sm font-medium text-gray-900">{ep.name}</span>
-                  <span className="text-xs text-gray-500">{ep.episode}</span>
-                </div>
-              ))}
-              {character.episode.length > 10 && (
-                <p className="text-sm text-gray-500 text-center py-2">
-                  +{character.episode.length - 10} more episodes
-                </p>
-              )}
-            </div>
-          </div>
         </div>
       </div>
 

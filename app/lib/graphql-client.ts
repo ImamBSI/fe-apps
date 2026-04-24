@@ -47,11 +47,6 @@ export const GET_CHARACTER_BY_ID = `
         name
         type
       }
-      episode {
-        id
-        name
-        episode
-      }
     }
   }
 `;
