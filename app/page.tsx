@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react';
 import { graphqlClient, GET_CHARACTERS } from './lib/graphql-client';
-import CharacterCard from '../components/char_card';
+import CharacterCard from '../components/char-card';
 import { Character, CharactersResponse } from '@/types';
 
 
