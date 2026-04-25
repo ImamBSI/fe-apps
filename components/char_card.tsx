@@ -36,7 +36,6 @@ export default function CharacterCard({ character }: CharacterCardProps) {
         <div className="p-3">
           <h3 className="font-semibold text-gray-900 truncate text-sm md:text-base">{character.name}</h3>
           <p className="text-xs text-gray-500 truncate">{character.species}</p>
-          <p className="text-xs text-gray-400 truncate mt-1">{character.location?.name}</p>
         </div>
       </div>
     </Link>
