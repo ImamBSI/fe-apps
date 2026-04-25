@@ -3,30 +3,9 @@
 
 import { useState, useEffect } from 'react';
 import { graphqlClient, GET_CHARACTERS } from './lib/graphql-client';
-import CharacterCard from './components/CharacterCard';
+import CharacterCard from '../components/char_card';
+import { Character, CharactersResponse } from '@/types';
 
-interface Character {
-  id: string;
-  name: string;
-  image: string;
-  status: string;
-  species: string;
-  gender: string;
-  location: {
-    name: string;
-  };
-}
-
-interface CharactersResponse {
-  characters: {
-    info: {
-      pages: number;
-      next: number | null;
-      prev: number | null;
-    };
-    results: Character[];
-  };
-}
 
 export default function CharactersPage() {
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -51,8 +30,9 @@ export default function CharactersPage() {
       }
       setTotalPages(data.characters.info.pages);
     } catch (err) {
-      setError('Failed to fetch characters');
-      console.error(err);
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+      setError(`Failed to fetch characters: ${errorMessage}`);
+      console.error('Fetch error:', err);
     } finally {
       setLoading(false);
     }

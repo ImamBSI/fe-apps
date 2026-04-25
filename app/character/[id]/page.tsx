@@ -66,7 +66,7 @@ export default function CharacterDetailPage() {
     setLoading(true);
     setError(null);
     try {
-      const data = await graphqlClient.request<CharacterResponse>(GET_CHARACTER_BY_ID, { id });
+      const data = await graphqlClient.request(GET_CHARACTER_BY_ID, { id });
       if (data.character) {
         setCharacter(data.character);
       } else {

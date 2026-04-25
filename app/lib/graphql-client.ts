@@ -1,9 +1,9 @@
 // filepath: app/lib/graphql-client.ts
 import { GraphQLClient } from 'graphql-request';
 
-const endpoint = 'https://rickandmortyapi.com/graphql';
+const RICK_MORTY_ENDPOINT = 'https://rickandmortyapi.com/graphql';
 
-export const graphqlClient = new GraphQLClient(endpoint);
+export const graphqlClient = new GraphQLClient(RICK_MORTY_ENDPOINT);
 
 // GraphQL Queries
 export const GET_CHARACTERS = `
