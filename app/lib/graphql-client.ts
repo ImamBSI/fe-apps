@@ -1,7 +1,7 @@
 // filepath: app/lib/graphql-client.ts
-import { GraphQLClient } from 'graphql-request';
+import { GraphQLClient } from "graphql-request";
 
-const RICK_MORTY_ENDPOINT = 'https://rickandmortyapi.com/graphql';
+const RICK_MORTY_ENDPOINT = "https://rickandmortyapi.com/graphql";
 
 export const graphqlClient = new GraphQLClient(RICK_MORTY_ENDPOINT);
 
