@@ -1,11 +1,10 @@
 // filepath: app/page.tsx
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { graphqlClient, GET_CHARACTERS } from './lib/graphql-client';
-import CharacterCard from '../components/char-card';
-import { Character, CharactersResponse } from '@/types';
-
+import { useState, useEffect } from "react";
+import { graphqlClient, GET_CHARACTERS } from "./lib/graphql-client";
+import CharacterCard from "../components/char-card";
+import { Character, CharactersResponse } from "@/types";
 
 export default function CharactersPage() {
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -22,7 +21,10 @@ export default function CharactersPage() {
     setLoading(true);
     setError(null);
     try {
-      const data = await graphqlClient.request<CharactersResponse>(GET_CHARACTERS, { page: pageNum });
+      const data = await graphqlClient.request<CharactersResponse>(
+        GET_CHARACTERS,
+        { page: pageNum },
+      );
       if (pageNum === 1) {
         setCharacters(data.characters.results);
       } else {
@@ -30,9 +32,9 @@ export default function CharactersPage() {
       }
       setTotalPages(data.characters.info.pages);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+      const errorMessage = err instanceof Error ? err.message : "Unknown error";
       setError(`Failed to fetch characters: ${errorMessage}`);
-      console.error('Fetch error:', err);
+      console.error("Fetch error:", err);
     } finally {
       setLoading(false);
     }
@@ -46,24 +48,20 @@ export default function CharactersPage() {
 
   return (
     <main className="min-h-screen bg-gray-50 pb-20 md:pb-8">
-      <div className="max-w-md mx-auto md:max-w-6xl md:px-4">
-        <header className="bg-white sticky top-0 z-40 shadow-sm">
-          <div className="px-4 py-4">
-            <h1 className="text-xl md:text-2xl font-bold text-gray-900">Rick and Morty</h1>
-            <p className="text-sm text-gray-500">Characters</p>
-          </div>
-        </header>
-
+      <div className="w-full px-3">
         {error && (
-          <div className="p-4 m-4 bg-red-50 text-red-600 rounded-lg">
+          <div className="p-4 mb-4 bg-red-50 text-red-600 rounded-lg">
             {error}
-            <button onClick={() => fetchCharacters(page)} className="ml-2 underline">
+            <button
+              onClick={() => fetchCharacters(page)}
+              className="ml-2 underline"
+            >
               Retry
             </button>
           </div>
         )}
 
-        <div className="p-2 md:p-4">
+        <div className="py-2 md:py-4">
           {loading && characters.length === 0 ? (
             <div className="flex justify-center items-center h-64">
               <div className="text-gray-500">Loading...</div>
@@ -77,8 +75,8 @@ export default function CharactersPage() {
               </div>
 
               {loading && characters.length > 0 && (
-                <div className="text-center py-8">
-                  <div className="text-gray-500">Loading more...</div>
+                <div className="text-center py-8 text-gray-500">
+                  Loading more...
                 </div>
               )}
 

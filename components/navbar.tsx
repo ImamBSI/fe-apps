@@ -7,8 +7,6 @@ import {
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,
-  NavigationMenuTrigger,
-  NavigationMenuContent,
   NavigationMenuLink,
 } from "./ui/navigation-menu";
 
@@ -25,8 +23,8 @@ export default function Navbar() {
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink asChild active={pathname === "/locations"}>
-              <Link href="/locations" className={pathname === "/locations" ? "text-black" : ""}>Locations</Link>
+            <NavigationMenuLink asChild active={pathname === "/locations-page"}>
+              <Link href="/locations-page" className={pathname === "/locations-page" ? "text-black" : ""}>Locations</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>

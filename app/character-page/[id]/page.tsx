@@ -187,134 +187,98 @@ export default function CharacterDetailPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 pb-20 md:pb-8 px-4 md:px-6">
-      {/* Success Toast */}
+    <main className="min-h-screen bg-gray-50">
+      {/* Toast */}
       {assignSuccess && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
           Character assigned successfully!
         </div>
       )}
 
-      <div className="max-w-md mx-auto md:max-w-full">
-        {/* Back Button */}
-        <div className="py-4">
+      <div className="w-full px-6 py-6">
+        {/* Back */}
+        <div className="mb-4">
           <button
             onClick={() => router.back()}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
           >
-            <span>←</span>
-            <span>Back</span>
+            ← Back
           </button>
         </div>
 
-        {/* MAIN GRID */}
-        <div className="md:grid md:grid-cols-2 md:gap-8">
+        {/* GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* IMAGE */}
-          <div className="relative h-64 md:h-auto md:min-h-150 w-full rounded-2xl overflow-hidden bg-gray-200">
+          <div className="relative w-full h-72 lg:h-auto lg:min-h-125 rounded-2xl overflow-hidden bg-gray-200">
             <Image
               src={character.image}
               alt={character.name}
               fill
               className="object-cover"
-              priority
             />
           </div>
 
-          {/* INFO PANEL */}
-          <div className="mt-4 md:mt-0 bg-white rounded-2xl p-5 md:p-8 shadow-sm flex flex-col justify-between">
-            {/* TOP */}
+          {/* INFO */}
+          <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col justify-between">
             <div>
-              {/* NAME */}
-              <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
                 {character.name}
               </h1>
 
-              {/* Assigned Badge */}
               {currentAssignment && (
                 <div className="mb-6 flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-lg">
-                  <span>
-                    📍 Assigned to:{" "}
-                    <strong>{currentAssignment.locationName}</strong>
-                  </span>
+                  📍 Assigned to{" "}
+                  <strong>{currentAssignment.locationName}</strong>
                   <button
                     onClick={handleRemoveAssignment}
-                    className="ml-2 text-blue-600 hover:text-blue-800 text-sm underline"
+                    className="ml-2 text-sm underline"
                   >
                     Remove
                   </button>
                 </div>
               )}
 
-              {/* INFO GRID (clean, no card per item) */}
-              <div className="grid grid-cols-2 gap-y-6 gap-x-6 mb-6">
-                <div>
-                  <p className="text-xs text-gray-400 uppercase tracking-wide">
-                    Status
-                  </p>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {character.status}
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-xs text-gray-400 uppercase tracking-wide">
-                    Gender
-                  </p>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {character.gender}
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-xs text-gray-400 uppercase tracking-wide">
-                    Species
-                  </p>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {character.species}
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-xs text-gray-400 uppercase tracking-wide">
-                    Type
-                  </p>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {character.type || "Unknown"}
-                  </p>
-                </div>
+              <div className="grid grid-cols-2 gap-6 mb-6">
+                {[
+                  ["Status", character.status],
+                  ["Gender", character.gender],
+                  ["Species", character.species],
+                  ["Type", character.type || "Unknown"],
+                ].map(([label, value]) => (
+                  <div key={label}>
+                    <p className="text-xs text-gray-400 uppercase tracking-wide">
+                      {label}
+                    </p>
+                    <p className="text-lg font-semibold text-gray-900">
+                      {value}
+                    </p>
+                  </div>
+                ))}
               </div>
 
-              {/* LOCATION */}
               {currentAssignment && (
-                <div className="bg-gray-50 p-4 rounded-xl mb-6">
-                  <h2 className="text-base font-semibold text-gray-900 mb-3">
-                    Location
-                  </h2>
+                <div className="bg-gray-50 p-4 rounded-xl">
+                  <h2 className="font-semibold mb-3">Location</h2>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-xs text-gray-400 uppercase">Origin</p>
-                      <p className="font-medium text-gray-900">
-                        {character.origin.name}
-                      </p>
+                      <p>{character.origin.name}</p>
                     </div>
                     <div>
                       <p className="text-xs text-gray-400 uppercase">
                         Current Location
                       </p>
-                      <p className="font-medium text-gray-900">
-                        {character.location.name}
-                      </p>
+                      <p>{character.location.name}</p>
                     </div>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* BUTTON */}
             {!currentAssignment && (
               <button
                 onClick={() => setShowAssignModal(true)}
-                className="w-full py-4 text-lg bg-indigo-500 text-white rounded-xl font-semibold hover:bg-indigo-600 transition"
+                className="w-full mt-6 py-4 bg-indigo-500 text-white rounded-xl text-lg font-semibold hover:bg-indigo-600"
               >
                 Assign To Location
               </button>
@@ -322,81 +286,6 @@ export default function CharacterDetailPage() {
           </div>
         </div>
       </div>
-
-      {/* MODAL (UNCHANGED) */}
-      {showAssignModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
-              Assign Character
-            </h2>
-            <p className="text-gray-600 mb-4">
-              Assign <strong>{character.name}</strong> to a location
-            </p>
-
-            <div className="mb-4 relative">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Location Name
-              </label>
-              <input
-                type="text"
-                value={locationName}
-                onChange={(e) => {
-                  setLocationName(e.target.value);
-                  setAssignError(null);
-                }}
-                onFocus={() => locationName.trim() && setShowSuggestions(true)}
-                onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                placeholder="Enter unique location name"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-
-              {showSuggestions && locationSuggestions.length > 0 && (
-                <div className="absolute z-10 w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1 max-h-48 overflow-y-auto">
-                  {locationSuggestions.map((loc, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      onClick={() => {
-                        setLocationName(loc);
-                        setShowSuggestions(false);
-                        setAssignError(null);
-                      }}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-900"
-                    >
-                      {loc}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {assignError && (
-                <p className="text-red-500 text-sm mt-1">{assignError}</p>
-              )}
-            </div>
-
-            <div className="flex gap-3">
-              <button
-                onClick={() => {
-                  setShowAssignModal(false);
-                  setLocationName("");
-                  setAssignError(null);
-                  setShowSuggestions(false);
-                }}
-                className="flex-1 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleAssign}
-                className="flex-1 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-              >
-                Assign
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </main>
   );
 }
