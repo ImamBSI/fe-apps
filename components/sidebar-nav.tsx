@@ -64,7 +64,7 @@ export default function SidebarNavigation() {
       </button>
 
       {/* ✅ DESKTOP SIDEBAR */}
-      <div className="hidden md:block h-full w-64 shrink-0 fixed md:static top-0 left-0 z-40">
+        <div className="hidden md:block w-64 shrink-0 fixed top-0 left-0 h-screen z-40">
         {sidebarContent}
       </div>
 
