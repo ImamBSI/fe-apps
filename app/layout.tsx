@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import {
-  SidebarProvider,
-  Sidebar
-} from "@/components/ui/sidebar";
+import { SidebarProvider} from "@/components/ui/sidebar";
 import SidebarNavigation from "@/components/sidebar-nav";
 
 const geistSans = Geist({
@@ -35,12 +32,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <SidebarProvider>
           <div className="flex min-h-screen w-full">
-            <div className="w-64 shrink-0">
-              <SidebarNavigation />
-            </div>
-            <div className="flex-1 min-w-0 w-full bg-gray-50">
-              {children}
-            </div>
+            <SidebarNavigation/>
+            <div className="flex-1 min-w-0 bg-gray-50">{children}</div>
           </div>
         </SidebarProvider>
       </body>
